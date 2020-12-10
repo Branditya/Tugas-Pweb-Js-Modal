@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.672);
+        }
+
+        .modal.show {
+            display: block;
+            animation: fade .5s forwards;
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            max-width: 576px;
+            margin: 50px auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .modal-content .modal-header {
+            padding: 30px 30px;
+        }
+        .invalid {
+            display: none;
+            background-color: red;
+            text-align: center;
+        }
+        .invalid.show {
+            display: block;
+        }
+        form {
+            width: 600px;
+            height: 200px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: silver;
+            border-radius: 15px;
+        }
+        
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            } 50% {
+                opacity: 1;
+                transform: scale(1.1);
+            } 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+<body id="body">
+    <form>
+        <h1>LOGIN</h1>
+        <div class="inputan>
+            <label for="username">Username</label>
+            <input id="username" type="text">
+        </div>
+        <div class="inputan">
+            <label for="password">Password</label>
+            <input id="password" type="password">
+        </div>
+        <button data-toggle="modal">LOGIN</button>
+    </form>
+    
+    <p class="invalid">'invalid username or password'</p>
+
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Login Success
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let button = document.querySelector('button[data-toggle="modal"]');
+        let modal =  document.querySelector('.modal');
+        let invalid = document.querySelector('.invalid') 
+
+        button.addEventListener('click', function(e) {
+            e.preventDefault()
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            if (username=="pweb_C" && password=="123123") {
+                modal.classList.add('show');
+                invalid.classList.remove('show');
+                document.getElementById('body').style.backgroundColor='green';
+            } else {
+                invalid.classList.add('show')
+                document.getElementById('body').style.backgroundColor='white';
+            }
+        });
+        
+        modal.addEventListener('click', function() {
+            this.classList.remove('show');
+        });
+        modal.querySelector('.modal-content').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+         
+         
+         
+    </script>
+</body>
+</html>
